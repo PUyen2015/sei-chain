@@ -72,7 +72,7 @@ func (k msgServer) PlaceOrders(goCtx context.Context, msg *types.MsgPlaceOrders)
 			return nil, sdkerrors.Wrapf(sdkerrors.ErrKeyNotFound, "the pair {price:%s,asset:%s} has no ticksize configured", priceDenom.String(), assetDenom.String())
 		}
 		pair := types.Pair{PriceDenom: priceDenom, AssetDenom: assetDenom, Ticksize: ticksize}
-		pairStr := types.PairString(pair.String())
+		pairStr := types.GetPairString(&pair)
 		order.Id = nextId
 		order.Account = msg.Creator
 		order.ContractAddr = msg.GetContractAddr()
